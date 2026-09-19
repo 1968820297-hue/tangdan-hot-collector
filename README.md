@@ -9,9 +9,7 @@
 
 当前版本：**0.3.9**。不需要安装 Node.js，也不需要编译；下载后即可在 Chrome 加载。
 
-[下载 ZIP](https://github.com/1968820297-hue/tangdan-hot-collector/archive/refs/heads/main.zip) · [使用教程](学员使用教程.md) · [GitHub 仓库](https://github.com/1968820297-hue/tangdan-hot-collector)
-
-仓库当前为私有，仅拥有访问权限的 GitHub 账号可以查看和下载。
+[下载 ZIP](https://github.com/1968820297-hue/tangdan-hot-collector/archive/refs/heads/main.zip) · [使用教程](使用教程.md) · [GitHub 仓库](https://github.com/1968820297-hue/tangdan-hot-collector)
 
 ## 关于汤淡
 
@@ -63,7 +61,7 @@
 
 `/wiki/...` 链接中的 token 是知识库节点标识，不能直接当作 `base_token` 使用；需要填写底层多维表格的真实 token。最直接的方式是获取该多维表格的 `/base/...` 链接。
 
-也支持「飞书开放平台 App ID / Secret」模式，需要应用具备多维表格读写权限，并获得目标表格访问与编辑权限。操作细节见 [使用教程](学员使用教程.md)。
+也支持「飞书开放平台 App ID / Secret」模式，需要应用具备多维表格读写权限，并获得目标表格访问与编辑权限。操作细节见 [使用教程](使用教程.md)。
 
 ## 四条使用路径
 
@@ -118,7 +116,7 @@
 | 更新后还显示旧昵称 | 在设置页修改并保存；旧配置独立于扩展文件 |
 | 标签列类型不匹配 | 在飞书中将已有字段调整为多选；插件不会强制转换已有列 |
 
-更多步骤与字段说明见 [使用教程](学员使用教程.md)。
+更多步骤与字段说明见 [使用教程](使用教程.md)。
 
 ## 文件结构
 
@@ -130,7 +128,7 @@
 ├── popup.html / popup.js         # 工具栏弹窗
 ├── options.html / options.js     # 飞书、监控与转写设置
 ├── icons/                        # 蓝底白色「淡」字图标
-├── 学员使用教程.md                # 完整操作说明
+├── 使用教程.md                # 完整操作说明
 ├── 整合版安装说明.md              # 整合版安装补充
 └── 技术复盘/                      # 架构图与技术复盘文档
 ```
