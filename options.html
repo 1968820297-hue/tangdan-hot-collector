@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>汤淡采集设置</title>
+    <link rel="icon" type="image/png" href="icons/icon-32.png">
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      body {
+        margin: 0;
+        background: #f7f8fa;
+        color: #111827;
+      }
+      main {
+        max-width: 760px;
+        margin: 32px auto;
+        padding: 0 20px 40px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 24px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .brand img {
+        display: block;
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        border-radius: 12px;
+      }
+      .brand h1 { margin: 0; }
+      p {
+        margin: 0 0 20px;
+        color: #4b5563;
+        line-height: 1.65;
+      }
+      form {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 20px;
+      }
+      fieldset {
+        margin: 22px 0 0;
+        border: 1px solid #dbeafe;
+        border-radius: 8px;
+        padding: 16px;
+        background: #f8fbff;
+      }
+      legend {
+        padding: 0 8px;
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+      label {
+        display: block;
+        margin: 14px 0 6px;
+        font-weight: 650;
+      }
+      input[type="text"],
+      input[type="password"],
+      select {
+        width: 100%;
+        min-height: 38px;
+        box-sizing: border-box;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 8px 10px;
+        font: inherit;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .row label {
+        margin: 0;
+        font-weight: 500;
+      }
+      button {
+        min-height: 36px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        padding: 0 14px;
+        cursor: pointer;
+        font: inherit;
+      }
+      button:disabled { cursor: not-allowed; opacity: .55; }
+      :focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+      .primary {
+        background: #111827;
+        color: #fff;
+      }
+      .secondary {
+        background: #fff;
+        border-color: #d1d5db;
+        color: #111827;
+      }
+      .actions {
+        flex-wrap: wrap;
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .hint {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #6b7280;
+      }
+      #status {
+        margin-top: 14px;
+        min-height: 20px;
+        color: #047857;
+      }
+      #status.error {
+        color: #b91c1c;
+      }
+      #monitorStatus {
+        margin-top: 12px;
+        min-height: 20px;
+        color: #1d4ed8;
+      }
+      #monitorStatus.error {
+        color: #b91c1c;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="brand">
+        <img src="icons/icon-128.png" width="48" height="48" alt="汤淡品牌图标">
+        <h1>汤淡采集设置</h1>
+      </header>
+      <p>这里配置飞书授权、抖音私聊监控和阿里云自动逐字稿。第一次同步时扩展会检查字段，缺少的字段会自动创建。</p>
+
+      <form id="settings-form">
+        <fieldset>
+          <legend>当前收集人</legend>
+          <label for="collectorName">收集人名称</label>
+          <input id="collectorName" type="text" autocomplete="off" placeholder="例如：汤淡">
+          <div class="hint">只保存在当前电脑的插件中。每条新入库视频都会把这个名字写入“收集人”列，朋友使用时请各自填写自己的名字。</div>
+        </fieldset>
+
+        <label for="authMode">飞书授权方式</label>
+        <select id="authMode">
+          <option value="personalBaseToken">多维表格授权码（推荐）</option>
+          <option value="openApi">飞书开放平台 App ID / Secret</option>
+        </select>
+
+        <section id="personal-token-section">
+          <label for="personalBaseToken">多维表格授权码</label>
+          <input id="personalBaseToken" type="password" autocomplete="off" placeholder="pt-xxxxxxxx">
+          <div class="hint">从多维表格「自定义插件 / 获取授权码」复制，通常以 pt- 开头。</div>
+        </section>
+
+        <section id="open-api-section">
+          <label for="appId">飞书 App ID</label>
+          <input id="appId" type="text" autocomplete="off" placeholder="cli_xxxxxxxxx">
+
+          <label for="appSecret">飞书 App Secret</label>
+          <input id="appSecret" type="password" autocomplete="off" placeholder="应用凭证里的 App Secret">
+          <div class="hint">个人本机使用可以这样配置；如果要分发给团队，建议改成服务端代理，不要把 App Secret 放在扩展里。</div>
+        </section>
+
+        <label for="appToken">多维表格 app_token / base_token</label>
+        <input id="appToken" type="text" autocomplete="off" placeholder="bascn... 或 app...">
+        <div class="hint">填写你自己的多维表格标识，或用下方 URL 自动填入。</div>
+
+        <label for="tableId">数据表 table_id</label>
+        <input id="tableId" type="text" autocomplete="off" placeholder="tblxxxxxxxx">
+        <div class="hint">填写需要接收达人信息的数据表 ID。</div>
+
+        <label for="baseUrl">多维表格 URL（可选）</label>
+        <input id="baseUrl" type="text" autocomplete="off" placeholder="粘贴 /base/... 或 /wiki/... 链接后可自动填入可识别的信息">
+        <div class="actions">
+          <button class="secondary" id="parseUrl" type="button">从 URL 填入</button>
+        </div>
+
+        <div class="row">
+          <input id="autoCreateFields" type="checkbox">
+          <label for="autoCreateFields">缺字段时自动创建</label>
+        </div>
+
+        <div class="row">
+          <input id="upsertByCreatorId" type="checkbox">
+          <label for="upsertByCreatorId">按「达人ID」更新已有记录</label>
+        </div>
+
+        <fieldset>
+          <legend>阿里云自动转逐字稿</legend>
+          <div class="row">
+            <input id="transcriptionEnabled" type="checkbox">
+            <label for="transcriptionEnabled">新监控视频入库后自动转逐字稿</label>
+          </div>
+
+          <label for="aliyunApiKey">阿里云百炼 API Key</label>
+          <input id="aliyunApiKey" type="password" autocomplete="off" placeholder="sk-xxxxxxxx">
+          <div class="hint">使用百炼 DashScope API Key，模型固定为 paraformer-v2。上面的开关只控制私聊自动监控；手动同步单条或主页作品时，可在插件弹窗或网页浮动面板按本次任务勾选转写。已有飞书视频也可以勾选表内“转逐字稿”，插件会在约 1 分钟内自动接收。视频文件地址会提交给阿里云并产生相应调用费用。Key 仅保存在这台电脑的插件本地存储中；完成后会把文字写入同一条飞书记录的“直接转逐字稿”文本列。</div>
+        </fieldset>
+
+        <fieldset>
+          <legend>抖音私聊自动监控</legend>
+          <div class="row">
+            <input id="monitorEnabled" type="checkbox">
+            <label for="monitorEnabled">启用私聊自动监控</label>
+          </div>
+
+          <label for="targetConversation">目标私聊名称</label>
+          <input id="targetConversation" type="text" autocomplete="off" placeholder="AI相关入库">
+          <div class="hint">必须与抖音会话列表里显示的名称完全一致。</div>
+
+          <label for="selfSenderName">自己的抖音昵称</label>
+          <input id="selfSenderName" type="text" autocomplete="off" placeholder="汤淡">
+          <div class="hint">默认填写“汤淡”；请确认与自己的抖音昵称完全一致，只采集该昵称发出的分享视频。</div>
+
+          <div class="row">
+            <input id="openOnStartup" type="checkbox">
+            <label for="openOnStartup">Chrome 启动时自动打开专用监控页</label>
+          </div>
+
+          <div class="actions">
+            <button class="secondary" id="openMonitor" type="button">打开监控页</button>
+            <button class="secondary" id="refreshMonitorStatus" type="button">刷新监控状态</button>
+          </div>
+          <div id="monitorStatus" role="status" aria-live="polite">尚未读取监控状态。</div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="primary" type="submit">保存设置</button>
+          <button class="secondary" id="test" type="button">测试连接</button>
+        </div>
+        <div id="status" role="status" aria-live="polite"></div>
+      </form>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

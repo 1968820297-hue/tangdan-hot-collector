@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "汤淡采集｜热点宝 + 私聊监控",
+  "version": "0.3.9",
+  "description": "采集抖音热点宝、达人作品，并自动监听指定私聊中的新转发写入飞书多维表格。",
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "debugger",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "汤淡采集｜热点宝达人提取",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://douhot.douyin.com/*",
+        "https://www.douyin.com/*",
+        "https://douyin.com/*",
+        "https://www.iesdouyin.com/*",
+        "https://iesdouyin.com/*",
+        "https://www.douyin.com/user/*",
+        "https://douyin.com/user/*",
+        "https://www.douyin.com/video/*",
+        "https://douyin.com/video/*",
+        "https://www.douyin.com/note/*",
+        "https://douyin.com/note/*"
+      ],
+      "js": [
+        "douhot-extractor.user.js",
+        "chat-monitor.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [
+    "https://douhot.douyin.com/*",
+    "https://v.douyin.com/*",
+    "https://www.iesdouyin.com/*",
+    "https://iesdouyin.com/*",
+    "https://www.douyin.com/*",
+    "https://douyin.com/*",
+    "https://dashscope.aliyuncs.com/*",
+    "https://*.aliyuncs.com/*",
+    "https://open.feishu.cn/*",
+    "https://base-api.feishu.cn/*"
+  ]
+}
