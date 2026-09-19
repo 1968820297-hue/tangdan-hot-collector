@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+*.zip
+Obsidian导出/
+.github-upload-state.json
